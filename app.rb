@@ -55,17 +55,6 @@ post '/visit' do
 
 	Client.create :name => username, :phone => phone, :datestamp => date, :barber => barber, :color => color
 
-	# db = get_db
-	# db.execute 'insert into users 
-	# 	(
-	# 		name,
-	# 		phone,
-	# 		datestamp,
-	# 		barber,
-	# 		color
-	# 	)
-	# 	values (?,?,?,?,?)', [@username, @phone, @date, @barber, color]
-
 	erb "<h2>Спасибо! Вы записались #{date}</h2>"
 end
 
