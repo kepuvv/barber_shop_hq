@@ -67,5 +67,17 @@ post '/visit' do
 	# 	values (?,?,?,?,?)', [@username, @phone, @date, @barber, color]
 
 	erb "<h2>Спасибо! Вы записались #{date}</h2>"
-	
+end
+
+get '/contacts' do
+  erb :contacts
+end
+
+post '/contacts' do
+	email = params[:email]
+	text = params[:text]
+
+	Contact.create :email => email, :text => text
+
+	erb "Ваше сообщение отправлено!"
 end
