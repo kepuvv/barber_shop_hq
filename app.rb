@@ -72,6 +72,9 @@ post '/contacts' do
 end
 
 # должно быть отображение записанных клиентов к конткретному барберу
-get '/berbers/:id' do
+get '/barbers/:id' do
+	@barber = Barber.find(params[:id])
+	@clients = Client.joins("INNER JOIN barbers ON barbers.name = clients.barber AND barbers.id =", params[:id]).order("datestamp asc")
 
+	erb :cl_list
 end

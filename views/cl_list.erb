@@ -1,0 +1,7 @@
+<H2> Список записанных клиентов <%=@barber.name %></H2>
+
+<% @clients.each do |client| %>
+ 	<p>
+ 		 <%=client.name %> <%=client.datestamp %>
+ 	</p>
+ <% end %>
