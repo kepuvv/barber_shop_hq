@@ -10,6 +10,9 @@ class Client < ActiveRecord::Base
 end
 
 class Barber < ActiveRecord::Base
+end
+
+class Contact < ActiveRecord::Base
 end  
 
 before do
@@ -17,27 +20,19 @@ before do
 end
 
 get '/' do
-	@barbers
 	erb :index
 end
 
 get '/visit' do
-
-	@barbers
-
 	erb :visit
 end
 
 post '/visit' do
-	@username = params[:username]
-	@phone = params[:phone]
-	@date = params[:datetime]
+	username = params[:username]
+	phone = params[:phone]
+	date = params[:datetime]
 	color = params[:color]
-	@barber = params[:barber]
-
-	db = get_db
-
-	@barbers = db.execute 'select * from barbers'
+	barber = params[:barber]
 
 	# автозаполнение введенных полей при повтороном вводе
 
@@ -58,17 +53,19 @@ post '/visit' do
 	# Можно объединить сообщения об ошибках
 	# @error = hh.select { |key,_| params[key] == '' }.values.join(",")
 
-	db = get_db
-	db.execute 'insert into users 
-		(
-			name,
-			phone,
-			datestamp,
-			barber,
-			color
-		)
-		values (?,?,?,?,?)', [@username, @phone, @date, @barber, color]
+	Client.create :name => username, :phone => phone, :datestamp => date, :barber => barber, :color => color
 
-	erb "<h2>Спасибо! Вы записались #{@date}</h2>"
+	# db = get_db
+	# db.execute 'insert into users 
+	# 	(
+	# 		name,
+	# 		phone,
+	# 		datestamp,
+	# 		barber,
+	# 		color
+	# 	)
+	# 	values (?,?,?,?,?)', [@username, @phone, @date, @barber, color]
+
+	erb "<h2>Спасибо! Вы записались #{date}</h2>"
 	
 end
