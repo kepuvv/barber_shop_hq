@@ -28,33 +28,33 @@ get '/visit' do
 end
 
 post '/visit' do
-	username = params[:username]
-	phone = params[:phone]
-	date = params[:datetime]
-	color = params[:color]
-	barber = params[:barber]
+	# username = params[:username]
+	# phone = params[:phone]
+	# date = params[:datetime]
+	# color = params[:color]
+	# barber = params[:barber]
 
-	# автозаполнение введенных полей при повтороном вводе
+	# # автозаполнение введенных полей при повтороном вводе
 
-	hh = { 	:username => 'Введите имя', 
-			:phone => 'Введите телефон', 
-			:datetime => 'Выберите дату' }
+	# hh = { 	:username => 'Введите имя', 
+	# 		:phone => 'Введите телефон', 
+	# 		:datetime => 'Выберите дату' }
 
 	# для каждой пары ключ-значение 
-	hh.each do |key, value|
+	# hh.each do |key, value|
 
-		if params[key] == ''
-			@error = value
+	# 	if params[key] == ''
+	# 		@error = value
 
-			return erb :visit 
-		end 
-	end
+	# 		return erb :visit 
+	# 	end 
+	# end
 
 	# Можно объединить сообщения об ошибках
 	# @error = hh.select { |key,_| params[key] == '' }.values.join(",")
 
 	# Запись на прием
-	Client.create :name => username, :phone => phone, :datestamp => date, :barber => barber, :color => color
+	# Client.create :name => username, :phone => phone, :datestamp => date, :barber => barber, :color => color
 
 	# Альтеннативная запись на прием (как у журавля)
 	# c = Client.new
@@ -65,7 +65,12 @@ post '/visit' do
 	# c.color = color
 	# c.save
 
-	erb "<h2>Спасибо! Вы записались #{date}</h2>"
+	# Тру способ записи всего, что выше.
+
+	c = Client.new params[:client] # сместо :client можно написать все что угодно
+	c.save
+
+	erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
 end
 
 get '/contacts' do
