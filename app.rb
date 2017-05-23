@@ -53,7 +53,17 @@ post '/visit' do
 	# Можно объединить сообщения об ошибках
 	# @error = hh.select { |key,_| params[key] == '' }.values.join(",")
 
+	# Запись на прием
 	Client.create :name => username, :phone => phone, :datestamp => date, :barber => barber, :color => color
+
+	# Альтеннативная запись на прием (как у журавля)
+	# c = Client.new
+	# c.name = username
+	# c.phone = phone
+	# c.date = date
+	# c.barber = barber
+	# c.color = color
+	# c.save
 
 	erb "<h2>Спасибо! Вы записались #{date}</h2>"
 end
