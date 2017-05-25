@@ -72,18 +72,25 @@ post '/visit' do
 	# Тру способ записи всего, что выше.
 
 	c = Client.new params[:client] # сместо :client можно написать все что угодно
-	c.save
+	#c.save
 
 	# проверка введенных параметров на пустоту
-	hh.each do |key,value|
-		if c.errors.messages[key].size > 0 # ActiveRecord создает хэш с ошибками errors.messages
-			@error = value
+	
+	# hh.each do |key,value|
+	# 	if c.errors.messages[key].size > 0 # ActiveRecord создает хэш с ошибками errors.messages
+	# 		@error = value
 
-			return erb :visit
-		end
+	# 		return erb :visit
+	# 	end
+	# end
+
+	# проверка журавля
+	if c.save 
+		erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
+	else
+		@error = c.errors.full_messages.first
+		erb :visit
 	end
-
-	erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
 end
 
 get '/contacts' do
