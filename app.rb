@@ -114,3 +114,11 @@ get '/barber/:id' do
 
 	erb :barber
 end
+
+get '/bookings' do
+	@clients = Client.all.order("datestamp asc")
+	erb :bookings
+end
+
+get '/client/:id' do
+end
