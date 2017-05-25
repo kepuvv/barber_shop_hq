@@ -121,4 +121,7 @@ get '/bookings' do
 end
 
 get '/client/:id' do
+	@client = Client.find(params[:id])
+	@barber = Barber.find_by name: "#{@client.barber}"
+	erb :client
 end
