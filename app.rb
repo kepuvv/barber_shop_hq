@@ -40,12 +40,12 @@ post '/visit' do
 
 	# # автозаполнение введенных полей при повтороном вводе
 
-	# hh = { 	:username => 'Введите имя', 
-	# 		:phone => 'Введите телефон', 
-	# 		:datetime => 'Выберите дату' }
+	 hh = { :name => 'Введите имя', 
+	 		:phone => 'Введите телефон', 
+	 		:datestamp => 'Выберите дату' }
 
 	# для каждой пары ключ-значение 
-	# hh.each do |key, value|
+	#hh.each do |key, value|
 
 	# 	if params[key] == ''
 	# 		@error = value
@@ -73,6 +73,15 @@ post '/visit' do
 
 	c = Client.new params[:client] # сместо :client можно написать все что угодно
 	c.save
+
+	# проверка введенных параметров на пустоту
+	hh.each do |key,value|
+		if c.errors.messages[key].size > 0 # ActiveRecord создает хэш с ошибками errors.messages
+			@error = value
+
+			return erb :visit
+		end
+	end
 
 	erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
 end
