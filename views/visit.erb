@@ -27,17 +27,17 @@ $(function() {
 
   <div class="form-group">
     <label>Ваше имя</label>
-    <input name="client[name]" type="text" class="form-control" value="" placeholder="Ваше имя">
+    <input name="client[name]" type="text" class="form-control" value="<%=@c.name%>" placeholder="Ваше имя">
   </div>
 
   <div class="form-group">
     <label>Ваш телефон</label>
-    <input name="client[phone]" type="text" class="form-control" value="" placeholder="Ваш телефон">
+    <input name="client[phone]" type="text" class="form-control" value="<%=@c.phone%>" placeholder="Ваш телефон">
   </div>
 
   <div class="form-group">
     <label>Когда вас ждать?</label>
-    <input name="client[datestamp]" id="datetimepicker" type="text" class="form-control" value="" placeholder="Введите дату и время">
+    <input name="client[datestamp]" id="datetimepicker" type="text" class="form-control" value="<%=@c.datestamp%>" placeholder="Введите дату и время">
   </div>
 
   <div class="form-group">

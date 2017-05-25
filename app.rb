@@ -28,6 +28,7 @@ get '/' do
 end
 
 get '/visit' do
+	@c = Client.new
 	erb :visit
 end
 
@@ -71,7 +72,7 @@ post '/visit' do
 
 	# Тру способ записи всего, что выше.
 
-	c = Client.new params[:client] # сместо :client можно написать все что угодно
+	@c = Client.new params[:client] # сместо :client можно написать все что угодно
 	#c.save
 
 	# проверка введенных параметров на пустоту
@@ -85,10 +86,10 @@ post '/visit' do
 	# end
 
 	# проверка журавля
-	if c.save 
+	if @c.save 
 		erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
 	else
-		@error = c.errors.full_messages.first
+		@error = @c.errors.full_messages.first
 		erb :visit
 	end
 end
