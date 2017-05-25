@@ -41,9 +41,9 @@ post '/visit' do
 
 	# # автозаполнение введенных полей при повтороном вводе
 
-	 hh = { :name => 'Введите имя', 
-	 		:phone => 'Введите телефон', 
-	 		:datestamp => 'Выберите дату' }
+	 # hh = { :name => 'Введите имя', 
+	 # 		:phone => 'Введите телефон', 
+	 # 		:datestamp => 'Выберите дату' }
 
 	# для каждой пары ключ-значение 
 	#hh.each do |key, value|
@@ -87,7 +87,7 @@ post '/visit' do
 
 	# проверка журавля
 	if @c.save 
-		erb "<h2>Спасибо! Вы записались #{c.datestamp}</h2>"
+		erb "<h2>Спасибо! Вы записались #{@c.datestamp}</h2>"
 	else
 		@error = @c.errors.full_messages.first
 		erb :visit
